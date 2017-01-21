@@ -1,140 +1,136 @@
-<!DOCTYPE HTML>
-<html>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="Keywords" content="blog"/>
-    <meta name="Description" content="blog"/>
-    <title>Simple</title>
-    <link rel="shortcut icon" href="/static/favicon.png"/>
-    <link rel="stylesheet" type="text/css" href="/main.css" />
-</head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MyAlbum</title>
+
+<style type="text/css">
+*{ margin:0px; padding:0px;}
+
+body{ background:#000; 
+	  overflow:hidden;
+	 }
+
+#banner{  width:100%; 
+		  height:200px;  
+		  margin-top:150px; 
+		  position:relative;
+		  transform-style:preserve-3d;  
+		  perspective:800px;
+		  }
+
+  #banner img{width:300px; 
+			  height:448px; 
+			  position:absolute;
+			  -webkit-box-reflect:below 0 -webkit-linear-gradient(top,rgba(0,0,0,.1),rgba(0,0,0,.5));
+			  transition:.5s; 
+			  cursor:pointer;
+  			}
+
+#banner img.left{ transform:rotateY(45deg) translateZ(-100px);
+				}
+				
+#banner img.middle{ transform:translateZ(100px);
+				  }
+				  
+#banner img.right{ transform:rotateY(-45deg) translateZ(-100px);
+				}
+				
+</style>
+
+ </head>
 <body>
-<div class="main">
-    <div class="header">
-    	<ul id="pages">
-            <li><a href="/">home</a></li>
-            <li><a href="/#/tags">tags</a></li>
-            <li><a href="/#/archive">archive</a></li>
-    	</ul>
-    </div>
-	<div class="wrap-header">
-	<h1>
-    <a href="/" id="title"></a>
-	</h1>
-	</div>
-<div id="md" style="display: none;">
-<!-- markdown -->
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>最后一页</title>
-<style type="text/css">
-h1 {text-align:center;color: red}
-p  {text-align:center;color: #BBC0C1}
-</style>
-</head>
-<body><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-<h1>祝贺！</h1>
-<p>您已到达因特网的最后一页。祝您网上冲浪愉快。</p>
-<p>现在，确实没有什么可浏览的内容了。您可以安全地关闭计算机，然后回到现实生活中。</p>
-</body>
-</html>
-<!-- markdown end -->
+<div id="banner">
+        <img src='img/car5.jpg' />
+        <img src='img/car4.jpg' />
+        <img src='img/car3.jpg' />
+        <img src='img/car2.jpg' />
+        <img src='img/car1.jpg' />
+
+        <img src='img/lufei.jpg' />
+
+        <img src='img/car1.jpg' />
+        <img src='img/car2.jpg' />
+        <img src='img/car3.jpg' />
+        <img src='img/car4.jpg' />
+        <img src='img/car5.jpg' />
+        
+        
+
 </div>
-<div class="entry" id="main">
-<!-- content -->
-<p>
 
-
-<meta charset="utf-8">
-<title>最后一页</title></p>
-
-<style type="text/css">
-h1 {text-align:center;color: red}
-p  {text-align:center;color: #BBC0C1}
-</style>
-
-<p>
-<br><br><br><br><br><br><br><br><br><br></p>
-
-<h1>祝贺！</h1>
-
-<p>您已到达因特网的最后一页。祝您网上冲浪愉快。</p>
-
-<p>现在，确实没有什么可浏览的内容了。您可以安全地关闭计算机，然后回到现实生活中。</p>
-
-<p>
-</p>
-<!-- content end -->
-</div>
-<br>
-<br>
-    <div id="disqus_thread"></div>
-	<div class="footer">
-		<p>© Copyright 2014 by isnowfy, Designed by isnowfy</p>
-	</div>
-</div>
-<script src="main.js"></script>
-<script id="content" type="text/mustache">
-    <h1>{{title}}</h1>
-    <div class="tag">
-    {{date}}
-    {{#tags}}
-    <a href="/#/tag/{{name}}">#{{name}}</a>
-    {{/tags}}
-    </div>
-</script>
-<script id="pagesTemplate" type="text/mustache">
-    {{#pages}}
-    <li>
-        <a href="{{path}}">{{title}}</a>
-    </li>
-    {{/pages}}
-</script>
+<script src="jquery.js"></script>
 <script>
-$(document).ready(function() {
-    $.ajax({
-        url: "main.json",
-        type: "GET",
-        dataType: "json",
-        success: function(data) {
-            $("#title").html(data.name);
-            var pagesTemplate = Hogan.compile($("#pagesTemplate").html());
-            var pagesHtml = pagesTemplate.render({"pages": data.pages});
-            $("#pages").append(pagesHtml);
-            //path
-            var path = "index.html";
-            //path end
-            var now = 0;
-            for (var i = 0; i < data.posts.length; ++i)
-                if (path == data.posts[i].path)
-                    now = i;
-            var post = data.posts[now];
-            var tmp = post.tags.split(" ");
-            var tags = [];
-            for (var i = 0; i < tmp.length; ++i)
-                if (tmp[i].length > 0)
-                    tags.push({"name": tmp[i]});
-            var contentTemplate = Hogan.compile($("#content").html());
-            var contentHtml = contentTemplate.render({"title": post.title, "tags": tags, "date": post.date});
-            $("#main").prepend(contentHtml);
-            if (data.disqus_shortname.length > 0) {
-                var disqus_shortname = data.disqus_shortname;
-                (function() {
-                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
-            }
-        }
-    });
-});
+	$(function(){
+		var imgL= $("#banner img").size();
+		var mIndex = Math.floor( imgL/2 );
+	function addLeft(){	
+		var winW = $(window) .width();
+		var imgW = $("#banner img").width();
+		var mLeft = (winW - imgW)/2	;
+		//imgW = 300   winW = 1920
+		//mleft = 810	
+		$("#banner img").each(function(i){
+				$(this).css('left',mLeft - 100*(mIndex-i) + 'px')
+				
+			})
+	};
+	addLeft();
+	$(window).resize(function(){
+			//尺寸发生变化时调用。
+				addLeft();
+				});
+				
+				
+	
+	$("#banner img").each(function(i){
+			if (i<mIndex)
+			{
+				$(this).attr("class","left")
+			}
+			else if (i==mIndex)
+			{
+				$(this).attr("class","middle")
+			}
+			else
+			{
+				$(this).attr("class","right")
+			}
+	})
+		
+		$("#banner img").click(function(){
+				var index = $(this).index();
+				
+				
+					$("#banner img").each(function(i){
+							//parseInt( $(this).css('left') ) - 100 );
+							//下面的css是设置位移
+							//$(this).css('left')输出的是left的值  如果index是8 - 11= -3    mindex=11   -300
+							
+							$(this).css('left',parseInt( $(this).css('left') ) - 100*(index-mIndex) +"px");
+						 
+							
+							if (i<index)
+							{
+								$(this).attr("class","left")
+							}
+							else if (i==index)
+							{
+								$(this).attr("class","middle")
+							}
+							else
+							{
+								$(this).attr("class","right")
+							}
+					});
+				mIndex = index;
+				});
+		});
 </script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ["\\(", "\\)"]], processEscapes: true}});
-</script>
+
+
+
 </body>
 </html>
+
