@@ -1,138 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3.2.33/dist/vue.global.prod.js"></script>
+    <style type="text/css">
+      * {
+        margin: 0px;
+        padding: 0px;
+      }
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>宁萌_album</title>
-<link rel="shortcut icon" href="http://www.uupoop.com/icotemp/20170123101821396/favicon.ico"/>
-<style type="text/css">
-*{ margin:0px; padding:0px;}
+      body {
+        background: #000;
+        overflow: hidden;
+      }
 
-body{ background:#000; 
-	  overflow:hidden;
-	 }
+      #banner {
+        width: 100%;
+        height: 200px;
+        position: absolute;
+        top: calc(50% - 320px);
+        transform-style: preserve-3d;
+        perspective: 800px;
+      }
 
-#banner{  width:100%; 
-		  height:200px;  
-		  margin-top:150px; 
-		  position:relative;
-		  transform-style:preserve-3d;  
-		  perspective:800px;
-		  }
+      #banner img {
+        width: 240px;
+        height: 320px;
+        position: absolute;
+        -webkit-box-reflect: below 0 -webkit-linear-gradient(top, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
+        transition: 0.5s;
+        cursor: pointer;
+      }
 
-  #banner img{width:240px; 
-			  height:320px; 
-			  position:absolute;
-			  -webkit-box-reflect:below 0 -webkit-linear-gradient(top,rgba(0,0,0,.1),rgba(0,0,0,.5));
-			  transition:.5s; 
-			  cursor:pointer;
-  			}
+      #banner img.left {
+        transform: rotateY(45deg) translateZ(-100px);
+      }
 
-#banner img.left{ transform:rotateY(45deg) translateZ(-100px);
-				}
-				
-#banner img.middle{ transform:translateZ(100px);
-				  }
-				  
-#banner img.right{ transform:rotateY(-45deg) translateZ(-100px);
-				}
-				
-</style>
+      #banner img.middle {
+        transform: translateZ(100px);
+      }
 
- </head>
-<body>
-<div id="banner">
-        <img src='http://b199.photo.store.qq.com/psb?/V107aSNt3ur3kA/55T6bftKhgj7Z1*I42xsykzDO5KHdjhhXRaKzA0TdGo!/m/dMcAAAAAAAAA&bo=wAMABcADAAUFCSo!&rf=photolist' />
-        <img src='http://b375.photo.store.qq.com/psb?/V107aSNt3ur3kA/IdgiecDjaxOvV.tr.m98EniUIaoYVlZV.toHaPemorc!/m/dHcBAAAAAAAA&bo=wAMABcADAAUFByQ!&rf=photolist' />
-        <img src='http://b375.photo.store.qq.com/psb?/V107aSNt3ur3kA/gDFkeQdYn2uLYepg*h*gPC0PpUbXMbg7gemhrqC5fkA!/m/dHcBAAAAAAAA&bo=IAMqBAAAAAAFByk!&rf=photolist' />
-        <img src='http://a2.qpic.cn/psb?/V107aSNt3ur3kA/N*DHpxVyk25mk0SiXialwI8MmboxZoqP.050qWOEtPw!/m/dFUBAAAAAAAA&bo=IAMqBAAAAAAFByk!&rf=photolist' />
-        <img src='http://a3.qpic.cn/psb?/V107aSNt3ur3kA/nswqc4zvK2w70bhNtZ5q1wfjXjK2yfER8F2ojbZEuak!/m/dFYBAAAAAAAA&bo=IAMqBAAAAAAFByk!&rf=photolist' />
+      #banner img.right {
+        transform: rotateY(-45deg) translateZ(-100px);
+      }
+    </style>
+  </head>
 
-        <img src='http://a3.qpic.cn/psb?/V107aSNt3ur3kA/IvuaoesEXAOotNvhJHw14ILOnkWB34REKpc8B3nGVHg!/m/dAoBAAAAAAAA&bo=KwEsAQAAAAAFByM!&rf=photolist' />
+  <body>
+    <div style="position: absolute; left: 0px; bottom: 0px">
+      <iframe
+        frameborder="no"
+        width="86"
+        height="86"
+        src="https://music.163.com/outchain/player?type=2&id=30496792&auto=0&height=66"
+      ></iframe>
+    </div>
 
-        <img src='http://a2.qpic.cn/psb?/V107aSNt3ur3kA/e1Hy9bJoJ87A5P2OaNaNGHaoyBMGJY2WvJW*d8dwJkU!/m/dHkBAAAAAAAA&bo=0ALAAwAAAAAFBzU!&rf=photolist' />
-        <img src='http://b380.photo.store.qq.com/psb?/V107aSNt3ur3kA/ppudDecadaJUuOXwW16Tf15czY4WI1s6pUWqVzVHImQ!/m/dHwBAAAAAAAA&bo=IAMqBAAAAAAFByk!&rf=photolist' />
-        <img src='http://b266.photo.store.qq.com/psb?/V107aSNt3ur3kA/q5kNq6Ei2H1FsPsUDdznFIZwRpU8oRnslCI2bEjRK2E!/m/dAoBAAAAAAAA&bo=0AK4BAAAAAAFB0o!&rf=photolist' />
-        <img src='http://b200.photo.store.qq.com/psb?/V107aSNt3ur3kA/J8wFAs2g1vD7GcA*nZdlWUX96sMzuSCynJzuaRqePPE!/m/dMgAAAAAAAAA&bo=wAMABcADAAUFCSo!&rf=photolist' />
-        <img src='http://b267.photo.store.qq.com/psb?/V107aSNt3ur3kA/pGZA7ldXOs2luTWmrgCHDxXbWClWqB1TuC8fP9Q84sQ!/m/dAsBAAAAAAAA&bo=wAPAA8ADwAMFByQ!&rf=photolist' />
-        
-        
+    <div id="app">
+      <div id="banner">
+        <img
+          v-for="image, index in images"
+          :src="image.src"
+          :style="{left: image.left + 'px'}"
+          :class="image.class"
+          @click="move_handle(index)"
+        />
+      </div>
+    </div>
 
-</div>
+    <script>
+      Vue.createApp({
+        mounted() {
+          this.init();
+          window.onresize = () => this.resize();
+        },
+        data() {
+          return {
+            middleIndex: 0,
+            middleLeft: 0,
+            images: [
+              {
+                src: "/images/0.jpeg",
+                left: 0,
+                class: "",
+              },
+              {
+                src: "/images/1.jpeg",
+                left: 0,
+                class: "",
+              },
+              {
+                src: "/images/2.jpeg",
+                left: 0,
+                class: "",
+              },
+              {
+                src: "/images/3.jpeg",
+                left: 0,
+                class: "",
+              },
+              {
+                src: "/images/4.jpeg",
+                left: 0,
+                class: "",
+              },
+              {
+                src: "/images/5.jpeg",
+                left: 0,
+                class: "",
+              },
+              {
+                src: "/images/6.jpeg",
+                left: 0,
+                class: "",
+              },
+              {
+                src: "/images/7.jpeg",
+                left: 0,
+                class: "",
+              },
+              {
+                src: "/images/8.jpeg",
+                left: 0,
+                class: "",
+              },
+            ],
+          };
+        },
+        methods: {
+          init() {
+            this.middleIndex = Math.floor(this.images.length / 2);
+            this.middleLeft =
+              (window.innerWidth -
+                document.getElementsByTagName("img")[0].width) /
+              2;
 
-<script src="jquery.js"></script>
-<script>
-	$(function(){
-		var imgL= $("#banner img").size();
-		var mIndex = Math.floor( imgL/2 );
-	function addLeft(){	
-		var winW = $(window) .width();
-		var imgW = $("#banner img").width();
-		var mLeft = (winW - imgW)/2	;
-		//imgW = 300   winW = 1920
-		//mleft = 810	
-		$("#banner img").each(function(i){
-				$(this).css('left',mLeft - 100*(mIndex-i) + 'px')
-				
-			})
-	};
-	addLeft();
-	$(window).resize(function(){
-			//尺寸发生变化时调用。
-				addLeft();
-				});
-				
-				
-	
-	$("#banner img").each(function(i){
-			if (i<mIndex)
-			{
-				$(this).attr("class","left")
-			}
-			else if (i==mIndex)
-			{
-				$(this).attr("class","middle")
-			}
-			else
-			{
-				$(this).attr("class","right")
-			}
-	})
-		
-		$("#banner img").click(function(){
-				var index = $(this).index();
-				
-				
-					$("#banner img").each(function(i){
-							//parseInt( $(this).css('left') ) - 100 );
-							//下面的css是设置位移
-							//$(this).css('left')输出的是left的值  如果index是8 - 11= -3    mindex=11   -300
-							
-							$(this).css('left',parseInt( $(this).css('left') ) - 100*(index-mIndex) +"px");
-						 
-							
-							if (i<index)
-							{
-								$(this).attr("class","left")
-							}
-							else if (i==index)
-							{
-								$(this).attr("class","middle")
-							}
-							else
-							{
-								$(this).attr("class","right")
-							}
-					});
-				mIndex = index;
-				});
-		});
-</script>
+            for (let index in this.images) {
+              this.images[index].left =
+                this.middleLeft - 100 * (this.middleIndex - index);
 
-<div style="position: absolute; left:0px; bottom:0px; width:86px; height:86px">
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=86 height=86 src="//music.163.com/outchain/player?type=2&id=30496792&auto=1&height=66"></iframe>
-</div>
-	
-</body>
+              this._set_class(index, this.middleIndex);
+            }
+          },
+          resize() {
+            this.middleLeft =
+              (window.innerWidth -
+                document.getElementsByTagName("img")[0].width) /
+              2;
+            for (let index in this.images) {
+              this.images[index].left =
+                this.middleLeft - 100 * (this.middleIndex - index);
+              this._set_class(index, this.middleIndex);
+            }
+          },
+          move_handle(nextMiddleIndex) {
+            for (let index in this.images) {
+              this.images[index].left -=
+                100 * (nextMiddleIndex - this.middleIndex);
+
+              this._set_class(index, nextMiddleIndex);
+            }
+            this.middleIndex = nextMiddleIndex;
+          },
+          _set_class(index, middleIndex) {
+            if (index < middleIndex) {
+              this.images[index].class = "left";
+            } else if (index == middleIndex) {
+              this.images[index].class = "middle";
+            } else {
+              this.images[index].class = "right";
+            }
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
 </html>
-
